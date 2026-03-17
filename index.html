@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>US Giveaways - Win Big Today!</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #0b3d5f 0%, #1b6b8f 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            animation: bgShift 10s infinite alternate;
+        }
+
+        @keyframes bgShift {
+            0% { background: linear-gradient(135deg, #0b3d5f 0%, #1b6b8f 100%); }
+            100% { background: linear-gradient(135deg, #0a4d6c 0%, #2a7f9c 100%); }
+        }
+
+        .container {
+            max-width: 1200px;
+            width: 100%;
+            margin: 0 auto;
+        }
+
+        .header {
+            text-align: center;
+            color: white;
+            margin-bottom: 50px;
+        }
+
+        .header h1 {
+            font-size: 56px;
+            margin-bottom: 15px;
+            text-shadow: 3px 3px 6px rgba(0,0,0,0.3);
+            animation: slideInDown 1s, glow 2s infinite alternate;
+        }
+
+        @keyframes glow {
+            from { text-shadow: 0 0 20px gold; }
+            to { text-shadow: 0 0 40px #ffd700, 0 0 60px #ff8c00; }
+        }
+
+        .header h1 span {
+            color: #ffd700;
+            display: inline-block;
+            animation: bounce 2s infinite;
+        }
+
+        .header .subtitle {
+            font-size: 24px;
+            background: rgba(255,255,255,0.2);
+            backdrop-filter: blur(10px);
+            padding: 15px 30px;
+            border-radius: 50px;
+            display: inline-block;
+        }
+
+        .giveaway-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin: 50px 0;
+        }
+
+        .giveaway-card {
+            background: rgba(255,255,255,0.95);
+            border-radius: 30px;
+            overflow: hidden;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+            transition: all 0.3s;
+            border: 2px solid transparent;
+            position: relative;
+            animation: fadeInUp 0.8s;
+            animation-fill-mode: both;
+        }
+
+        .giveaway-card:nth-child(1) { animation-delay: 0.1s; }
+        .giveaway-card:nth-child(2) { animation-delay: 0.3s; }
+        .giveaway-card:nth-child(3) { animation-delay: 0.5s; }
+
+        .giveaway-card:hover {
+            transform: translateY(-15px);
+            box-shadow: 0 30px 60px rgba(0,0,0,0.3);
+            border-color: #ffd700;
+        }
+
+        .card-badge {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: linear-gradient(45deg, #ff416c, #ff4b2b);
+            color: white;
+            padding: 8px 20px;
+            border-radius: 25px;
+            font-weight: bold;
+            font-size: 14px;
+            z-index: 2;
+            animation: pulse 2s infinite;
+        }
+
+        .card-header {
+            padding: 30px 25px 15px;
+            text-align: center;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .card-header h2 {
+            font-size: 32px;
+            margin-bottom: 5px;
+        }
+
+        .card-header .prize {
+            font-size: 28px;
+            color: #ffd700;
+            font-weight: bold;
+        }
+
+        .card-body {
+            padding: 25px;
+        }
+
+        .prize-detail {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 15px;
+            padding: 10px;
+            background: rgba(102,126,234,0.05);
+            border-radius: 10px;
+            transition: transform 0.3s;
+        }
+
+        .prize-detail:hover {
+            transform: translateX(10px);
+            background: rgba(102,126,234,0.1);
+        }
+
+        .prize-detail .emoji {
+            font-size: 28px;
+            min-width: 45px;
+            text-align: center;
+        }
+
+        .prize-detail span:last-child {
+            color: #333;
+            font-size: 16px;
+        }
+
+        .country-tag {
+            display: inline-block;
+            background: linear-gradient(45deg, #002868, #BF0A30);
+            color: white;
+            padding: 5px 20px;
+            border-radius: 25px;
+            font-size: 14px;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        .btn {
+            display: block;
+            width: 100%;
+            padding: 18px;
+            border: none;
+            border-radius: 15px;
+            font-size: 22px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+            text-align: center;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-top: 25px;
+            background: linear-gradient(45deg, #00b09b, #96c93d);
+            color: white;
+            box-shadow: 0 10px 20px rgba(0,176,155,0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn:hover {
+            transform: scale(1.03);
+            box-shadow: 0 15px 30px rgba(0,176,155,0.5);
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            transition: left 0.5s;
+        }
+
+        .btn:hover::before {
+            left: 100%;
+        }
+
+        .stats {
+            display: flex;
+            justify-content: space-around;
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(10px);
+            padding: 30px;
+            border-radius: 30px;
+            margin: 50px 0 30px;
+            color: white;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-item span {
+            font-size: 40px;
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .stat-item p {
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        .footer {
+            text-align: center;
+            color: rgba(255,255,255,0.8);
+            margin-top: 50px;
+            padding: 20px;
+            border-top: 1px solid rgba(255,255,255,0.2);
+        }
+
+        @keyframes slideInDown {
+            from {
+                transform: translateY(-50px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                transform: translateY(50px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 42px;
+            }
+
+            .subtitle {
+                font-size: 18px;
+            }
+
+            .giveaway-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .stats {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🇺🇸 <span>USA</span> GIVEAWAYS 🇺🇸</h1>
+            <div class="subtitle">Win Cash & Rewards - Limited Time Only!</div>
+        </div>
+
+        <div class="giveaway-grid">
+            <!-- Card 1: Cash App $750 -->
+            <div class="giveaway-card">
+                <div class="card-badge">🔥 TOP OFFER</div>
+                <div class="card-header">
+                    <h2>Cash App</h2>
+                    <div class="prize">$750</div>
+                </div>
+                <div class="card-body">
+                    <span class="country-tag">🇺🇸 USA ONLY</span>
+                    <div class="prize-detail">
+                        <span class="emoji">💰</span>
+                        <span>$750 Cash App Reward</span>
+                    </div>
+                    <div class="prize-detail">
+                        <span class="emoji">⚡</span>
+                        <span>Instant Transfer</span>
+                    </div>
+                    <div class="prize-detail">
+                        <span class="emoji">🎁</span>
+                        <span>50 Winners</span>
+                    </div>
+                    <a href="https://smrturl.co/a/s004ca26f15/663?s1=" class="btn" target="_blank">💰 CLAIM $750</a>
+                </div>
+            </div>
+
+            <!-- Card 2: $1,000 Aldi Rewards -->
+            <div class="giveaway-card">
+                <div class="card-badge">🛒 GROCERY</div>
+                <div class="card-header">
+                    <h2>Aldi Rewards</h2>
+                    <div class="prize">$1,000</div>
+                </div>
+                <div class="card-body">
+                    <span class="country-tag">🇺🇸 USA ONLY</span>
+                    <div class="prize-detail">
+                        <span class="emoji">🛒</span>
+                        <span>$1,000 Aldi Gift Card</span>
+                    </div>
+                    <div class="prize-detail">
+                        <span class="emoji">🥫</span>
+                        <span>Shop Groceries Free</span>
+                    </div>
+                    <div class="prize-detail">
+                        <span class="emoji">🎯</span>
+                        <span>100 Winners</span>
+                    </div>
+                    <a href="https://smrturl.co/a/s004ca26f15/17412?s1=" class="btn" target="_blank">🛒 CLAIM $1,000</a>
+                </div>
+            </div>
+
+            <!-- Card 3: Chick-fil-A $100 -->
+            <div class="giveaway-card">
+                <div class="card-badge">🍔 FOOD</div>
+                <div class="card-header">
+                    <h2>Chick-fil-A</h2>
+                    <div class="prize">$100</div>
+                </div>
+                <div class="card-body">
+                    <span class="country-tag">🇺🇸 USA ONLY</span>
+                    <div class="prize-detail">
+                        <span class="emoji">🍗</span>
+                        <span>$100 Chick-fil-A Credit</span>
+                    </div>
+                    <div class="prize-detail">
+                        <span class="emoji">🍟</span>
+                        <span>Free Meals for Weeks</span>
+                    </div>
+                    <div class="prize-detail">
+                        <span class="emoji">🎉</span>
+                        <span>200 Winners</span>
+                    </div>
+                    <a href="https://smrturl.co/a/s004ca26f15/7?s1=" class="btn" target="_blank">🍔 CLAIM $100</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Stats Counter -->
+        <div class="stats">
+            <div class="stat-item">
+                <span>🎁</span>
+                <p>3 Active Giveaways</p>
+            </div>
+            <div class="stat-item">
+                <span>🏆</span>
+                <p>350+ Winners</p>
+            </div>
+            <div class="stat-item">
+                <span>⚡</span>
+                <p>Instant Claim</p>
+            </div>
+            <div class="stat-item">
+                <span>🇺🇸</span>
+                <p>USA Only</p>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="footer">
+            <p>© 2025 USA Giveaways. All rights reserved.</p>
+            <p style="font-size: 13px; margin-top: 10px;">⚠️ Only for USA residents. Terms apply.</p>
+        </div>
+    </div>
+
+    <script>
+        // Track clicks
+        document.querySelectorAll('.btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                console.log('✅ Giveaway clicked: ' + this.href);
+            });
+        });
+
+        console.log('✅ USA Giveaways site ready!');
+    </script>
+</body>
+</html>
